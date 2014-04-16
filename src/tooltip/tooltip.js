@@ -265,17 +265,27 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             };
 
             attrs.$observe( prefix+'Trigger', function ( val ) {
-              unregisterTriggers();
+            if (val != 'manual') {
+                unregisterTriggers();
 
-              triggers = getTriggers( val );
+                triggers = getTriggers( val );
 
-              if ( triggers.show === triggers.hide ) {
-                element.bind( triggers.show, toggleTooltipBind );
-              } else {
-                element.bind( triggers.show, showTooltipBind );
-                element.bind( triggers.hide, hideTooltipBind );
-              }
-            });
+                if ( triggers.show === triggers.hide ) {
+                  element.bind( triggers.show, toggleTooltipBind );
+                } else {
+                  element.bind( triggers.show, showTooltipBind );
+                  element.bind( triggers.hide, hideTooltipBind );
+                }
+              });
+            }
+            
+            scope.$watch(attrs[prefix + 'Toggle'], function (val) {
+	      if (val) {
+		$timeout(show);
+	      } else {
+		$timeout(hide);
+  	      }
+	    });
 
             var animation = scope.$eval(attrs[prefix + 'Animation']);
             scope.tt_animation = angular.isDefined(animation) ? !!animation : options.animation;
