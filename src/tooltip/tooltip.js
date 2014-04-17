@@ -265,7 +265,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             };
 
             attrs.$observe( prefix+'Trigger', function ( val ) {
-            if (val != 'manual') {
+              if (val != 'manual') {
                 unregisterTriggers();
 
                 triggers = getTriggers( val );
@@ -276,8 +276,8 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
                   element.bind( triggers.show, showTooltipBind );
                   element.bind( triggers.hide, hideTooltipBind );
                 }
-              });
-            }
+              }
+            });
             
             scope.$watch(attrs[prefix + 'Toggle'], function (val) {
 	      if (val) {
