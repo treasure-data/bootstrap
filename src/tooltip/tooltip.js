@@ -265,7 +265,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             };
 
             attrs.$observe( prefix+'Trigger', function ( val ) {
-              if (val != 'manual') {
+              if (val !== 'manual') {
                 unregisterTriggers();
 
                 triggers = getTriggers( val );
